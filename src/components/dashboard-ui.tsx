@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import React from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   LineChart,
   Line,
@@ -10,7 +10,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-} from "recharts"
+} from "recharts";
 import {
   ArrowUpRight,
   ArrowDownRight,
@@ -18,27 +18,27 @@ import {
   ShoppingCart,
   DollarSign,
   Package,
-} from "lucide-react"
+} from "lucide-react";
 
 interface SalesData {
-  date: string
-  amount: number
+  date: string;
+  amount: number;
 }
 
 interface StoreStats {
-  totalRevenue: number
-  revenueChange: number
-  orders: number
-  ordersChange: number
-  customers: number
-  customersChange: number
-  products: number
-  productsChange: number
-  salesHistory: SalesData[]
+  totalRevenue: number;
+  revenueChange: number;
+  orders: number;
+  ordersChange: number;
+  customers: number;
+  customersChange: number;
+  products: number;
+  productsChange: number;
+  salesHistory: SalesData[];
 }
 
 interface DashboardProps {
-  data: StoreStats
+  data: StoreStats;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ data }) => {
@@ -46,8 +46,8 @@ const Dashboard: React.FC<DashboardProps> = ({ data }) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
-    }).format(value)
-  }
+    }).format(value);
+  };
 
   const StatCard = ({
     title,
@@ -55,10 +55,10 @@ const Dashboard: React.FC<DashboardProps> = ({ data }) => {
     change,
     icon: Icon,
   }: {
-    title: string
-    value: string | number
-    change: number
-    icon: React.ComponentType
+    title: string;
+    value: string | number;
+    change: number;
+    icon: React.ComponentType;
   }) => (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -76,14 +76,16 @@ const Dashboard: React.FC<DashboardProps> = ({ data }) => {
             <ArrowDownRight className="h-4 w-4 text-red-500" />
           )}
           <span
-            className={`text-sm ${change > 0 ? "text-green-500" : "text-red-500"}`}
+            className={`text-sm ${
+              change > 0 ? "text-green-500" : "text-red-500"
+            }`}
           >
             {Math.abs(change)}%
           </span>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 
   return (
     <div className="p-6 space-y-6">
@@ -125,17 +127,19 @@ const Dashboard: React.FC<DashboardProps> = ({ data }) => {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis
                   dataKey="date"
-                  tickFormatter={(value) =>
+                  tickFormatter={(value: string | number | Date) =>
                     new Date(value).toLocaleDateString()
                   }
                 />
-                <YAxis tickFormatter={(value) => formatCurrency(value)} />
+                <YAxis
+                  tickFormatter={(value: number) => formatCurrency(value)}
+                />
                 <Tooltip
                   formatter={(value: number) => [
                     formatCurrency(value),
                     "Revenue",
                   ]}
-                  labelFormatter={(label) =>
+                  labelFormatter={(label: string | number | Date) =>
                     new Date(label).toLocaleDateString()
                   }
                 />
@@ -151,7 +155,7 @@ const Dashboard: React.FC<DashboardProps> = ({ data }) => {
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
