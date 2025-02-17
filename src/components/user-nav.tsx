@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { UserButton, useUser } from "@clerk/nextjs"
+import { UserButton, useUser } from "@clerk/nextjs";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,14 +9,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { Settings, User, CreditCard, LogOut } from "lucide-react"
-
-interface UserNavProps {}
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Settings, User, CreditCard, LogOut } from "lucide-react";
 
 export default function UserNav() {
-  const { user } = useUser()
+  const { user } = useUser();
 
   return (
     <DropdownMenu>
@@ -62,5 +60,5 @@ export default function UserNav() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

@@ -1,12 +1,13 @@
-"use client"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 
-import React, { useEffect } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import React, { useEffect } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -14,25 +15,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import Link from "next/link"
-import { PasswordInput } from "@/components/password-input"
-import { useRouter } from "next/navigation"
-import { useSignIn } from "@clerk/nextjs"
-import { authSchemaLogin } from "@/lib/validators/auth"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { PasswordInput } from "@/components/password-input";
+import { useRouter } from "next/navigation";
+import { useSignIn } from "@clerk/nextjs";
+import { authSchemaLogin } from "@/lib/validators/auth";
 
-import { LoadingSpinner } from "@/icons/loading-spinner"
-import Image from "next/image"
-import { z } from "zod"
+import { LoadingSpinner } from "@/icons/loading-spinner";
+import { z } from "zod";
 
-type Inputs = z.infer<typeof authSchemaLogin>
+type Inputs = z.infer<typeof authSchemaLogin>;
 
 export function SignInForm() {
-  const router = useRouter()
-  const { isLoaded, signIn, setActive } = useSignIn()
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const [rememberMe, setRememberMe] = React.useState<boolean>(false)
+  const router = useRouter();
+  const { isLoaded, signIn, setActive } = useSignIn();
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [rememberMe, setRememberMe] = React.useState<boolean>(false);
 
   const form = useForm<Inputs>({
     resolver: zodResolver(authSchemaLogin),
@@ -40,51 +40,51 @@ export function SignInForm() {
       email: "",
       password: "",
     },
-  })
+  });
 
   useEffect(() => {
-    const savedEmail = localStorage.getItem("email")
-    const savedPassword = localStorage.getItem("password")
+    const savedEmail = localStorage.getItem("email");
+    const savedPassword = localStorage.getItem("password");
 
     if (savedEmail && savedPassword) {
-      form.setValue("email", savedEmail)
-      form.setValue("password", savedPassword)
-      setRememberMe(true)
+      form.setValue("email", savedEmail);
+      form.setValue("password", savedPassword);
+      setRememberMe(true);
     }
-  }, [form])
+  }, [form]);
 
   async function onSubmit(data: z.infer<typeof authSchemaLogin>) {
     if (!isLoaded) {
-      return
+      return;
     }
 
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const result = await signIn.create({
         identifier: data.email,
         password: data.password,
-      })
+      });
 
       if (result.status === "complete") {
-        await setActive({ session: result.createdSessionId })
+        await setActive({ session: result.createdSessionId });
 
         if (rememberMe) {
-          localStorage.setItem("email", data.email)
-          localStorage.setItem("password", data.password)
+          localStorage.setItem("email", data.email);
+          localStorage.setItem("password", data.password);
         } else {
-          localStorage.removeItem("email")
-          localStorage.removeItem("password")
+          localStorage.removeItem("email");
+          localStorage.removeItem("password");
         }
 
-        router.push(`/auth-callback`)
+        router.push(`/auth-callback`);
       } else {
         /* Investigate why the login hasn't completed */
-        console.log(result)
+        console.log(result);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
 
@@ -165,7 +165,7 @@ export function SignInForm() {
         </Form>
         <div className="w-full my-4 h-[20px] flex justify-center">
           <span>
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href={"/sign-up"}>
               <span className="text-primary">Create one now</span>
             </Link>
@@ -173,5 +173,5 @@ export function SignInForm() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { useSignUp } from "@clerk/nextjs"
-import React from "react"
+} from "@/components/ui/card";
+import { useSignUp } from "@clerk/nextjs";
+import React from "react";
 import {
   Form,
   FormControl,
@@ -21,22 +21,22 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import Link from "next/link"
-import { PasswordInput } from "@/components/password-input"
-import { authSchema } from "@/lib/validators/auth"
-import { useRouter } from "next/navigation"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { PasswordInput } from "@/components/password-input";
+import { authSchema } from "@/lib/validators/auth";
+import { useRouter } from "next/navigation";
 
-import { LoadingSpinner } from "@/icons/loading-spinner"
-import { z } from "zod"
+import { LoadingSpinner } from "@/icons/loading-spinner";
+import { z } from "zod";
 
-type Inputs = z.infer<typeof authSchema>
+type Inputs = z.infer<typeof authSchema>;
 
 export function SignUpForm() {
-  const { isLoaded, signUp } = useSignUp()
-  const router = useRouter()
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const { isLoaded, signUp } = useSignUp();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const form = useForm<Inputs>({
     resolver: zodResolver(authSchema),
@@ -44,28 +44,28 @@ export function SignUpForm() {
       email: "",
       password: "",
     },
-  })
+  });
 
   async function onSubmit(data: z.infer<typeof authSchema>) {
-    if (!isLoaded) return
+    if (!isLoaded) return;
 
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       await signUp.create({
         emailAddress: data.email,
         password: data.password,
-      })
+      });
 
       // Send email verification code
       await signUp.prepareEmailAddressVerification({
         strategy: "email_code",
-      })
+      });
 
-      router.push("/sign-up/verify-email")
+      router.push("/sign-up/verify-email");
     } catch (err) {
-      console.log(err)
+      console.log(err);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
 
@@ -127,8 +127,8 @@ export function SignUpForm() {
 
             <div className="w-full h-[20px] flex justify-between items-center">
               <FormDescription>
-                By clicking "Create Free Account" you agree to our Terms and
-                Conditions.
+                By clicking &apos;Create Free Account&apos; you agree to our
+                Terms and Conditions.
               </FormDescription>
             </div>
             <Button
@@ -153,5 +153,5 @@ export function SignUpForm() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

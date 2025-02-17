@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import React from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -14,21 +14,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { useSignIn } from "@clerk/nextjs"
-import { useRouter } from "next/navigation"
-import { resetPasswordSchema } from "@/lib/validators/auth"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useSignIn } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { resetPasswordSchema } from "@/lib/validators/auth";
 
-import { PasswordInput } from "@/components/password-input"
-import { LoadingSpinner } from "@/icons/loading-spinner"
+import { PasswordInput } from "@/components/password-input";
+import { LoadingSpinner } from "@/icons/loading-spinner";
 
-type Inputs = z.infer<typeof resetPasswordSchema>
+type Inputs = z.infer<typeof resetPasswordSchema>;
 
 export function ResetPasswordStep2Form() {
-  const router = useRouter()
-  const { isLoaded, signIn, setActive } = useSignIn()
-  const [isPending, startTransition] = React.useTransition()
+  const router = useRouter();
+  const { isLoaded, signIn, setActive } = useSignIn();
+  const [isPending, startTransition] = React.useTransition();
 
   // react-hook-form
   const form = useForm<Inputs>({
@@ -38,10 +38,10 @@ export function ResetPasswordStep2Form() {
       confirmPassword: "",
       code: "",
     },
-  })
+  });
 
   function onSubmit(data: Inputs) {
-    if (!isLoaded) return
+    if (!isLoaded) return;
 
     startTransition(async () => {
       try {
@@ -49,27 +49,27 @@ export function ResetPasswordStep2Form() {
           strategy: "reset_password_email_code",
           code: data.code,
           password: data.password,
-        })
+        });
 
         if (attemptFirstFactor.status === "needs_second_factor") {
           // TODO: implement 2FA (requires clerk pro plan)
         } else if (attemptFirstFactor.status === "complete") {
           await setActive({
             session: attemptFirstFactor.createdSessionId,
-          })
-          router.push(`${window.location.origin}/`)
+          });
+          router.push(`${window.location.origin}/`);
         } else {
-          console.error(attemptFirstFactor)
+          console.error(attemptFirstFactor);
         }
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    })
+    });
   }
   return (
     <Card className="w-[480px] pt-4 min-h-[250px] h-fit ">
       <CardHeader>
-        <CardTitle>غير كلمة المرور الخاصة بك</CardTitle>
+        <CardTitle>Change Your Password</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -79,7 +79,7 @@ export function ResetPasswordStep2Form() {
               name="code"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>الرمز</FormLabel>
+                  <FormLabel>Code</FormLabel>
                   <FormControl>
                     <Input placeholder="******" {...field} />
                   </FormControl>
@@ -88,16 +88,19 @@ export function ResetPasswordStep2Form() {
                 </FormItem>
               )}
             />
-            <FormDescription>أدخل الرمز الذي أرسلناه لك</FormDescription>
+            <FormDescription>Enter the code we sent you</FormDescription>
 
             <FormField
               control={form.control}
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>كلمة المرور </FormLabel>
+                  <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <PasswordInput placeholder="أدخِل كلمة المرور" {...field} />
+                    <PasswordInput
+                      placeholder="Enter your password"
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />
@@ -109,9 +112,12 @@ export function ResetPasswordStep2Form() {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>تأكيد كلمة المرور</FormLabel>
+                  <FormLabel>Confirm Password</FormLabel>
                   <FormControl>
-                    <PasswordInput placeholder="أدخِل كلمة المرور" {...field} />
+                    <PasswordInput
+                      placeholder="Enter your password"
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />
@@ -126,12 +132,12 @@ export function ResetPasswordStep2Form() {
               size="lg"
               className="w-full text-white font-bold bg-primary flex items-center justify-center gap-x-4 rounded-xl"
             >
-              تغيير كلمة المرور
+              Change Password
               {isPending && <LoadingSpinner />}
             </Button>
           </form>
         </Form>
       </CardContent>
     </Card>
-  )
+  );
 }

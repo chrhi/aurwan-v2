@@ -1,7 +1,4 @@
 import { VerifyEmail } from "@/components/forms/auth/confirme.form";
-import { SignInForm } from "@/components/forms/auth/sign-in.form";
-
-interface pageProps {}
 
 export default function page() {
   return (

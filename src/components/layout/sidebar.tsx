@@ -1,16 +1,22 @@
-"use client"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
 
-import { buttonVariants } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { UserButton, useUser } from "@clerk/nextjs"
-import { Workflow, Home, Settings, ChevronLeft, LucideIcon } from "lucide-react"
-import Link from "next/link"
-import { useState } from "react"
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import {
+  Workflow,
+  Home,
+  Settings,
+  ChevronLeft,
+  LucideIcon,
+} from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 interface SidebarItem {
-  href: string
-  icon: LucideIcon
-  text: string
+  href: string;
+  icon: LucideIcon;
+  text: string;
 }
 
 const UserSkeleton = () => (
@@ -21,7 +27,7 @@ const UserSkeleton = () => (
       <div className="h-3 bg-gray-200 rounded animate-pulse w-32" />
     </div>
   </div>
-)
+);
 
 const SIDEBAR_ITEMS: SidebarItem[] = [
   { href: "/dashboard", icon: Home, text: "Home" },
@@ -30,17 +36,16 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
   { href: "/dashboard/settings", icon: Settings, text: "Orders" },
   { href: "/dashboard/settings", icon: Settings, text: "Funnels" },
   { href: "/dashboard/settings", icon: Settings, text: "Stores" },
-]
+];
 
 const Sidebar = ({
   onClose,
   className,
 }: {
-  onClose?: () => void
-  className?: string
+  onClose?: () => void;
+  className?: string;
 }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false)
-  const { user, isLoaded } = useUser()
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <div
@@ -123,7 +128,7 @@ const Sidebar = ({
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

@@ -1,11 +1,9 @@
-import { cn } from "@/lib/utils"
-
 export function LoadingSpinner({
   height = 25,
   width = 25,
 }: {
-  width?: number
-  height?: number
+  width?: number;
+  height?: number;
 }) {
   return (
     <svg
@@ -63,15 +61,15 @@ export function LoadingSpinner({
         r="70"
       ></circle>
     </svg>
-  )
+  );
 }
 
 export function OrangeLoadingSpinner({
   height = 25,
   width = 25,
 }: {
-  width?: number
-  height?: number
+  width?: number;
+  height?: number;
 }) {
   return (
     <svg
@@ -129,5 +127,5 @@ export function OrangeLoadingSpinner({
         r="70"
       ></circle>
     </svg>
-  )
+  );
 }
