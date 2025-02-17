@@ -1,0 +1,11 @@
+import { SignUpForm } from "@/components/forms/auth/sign-up.form";
+
+interface pageProps {}
+
+export default function page() {
+  return (
+    <div className="w-full h-screen bg-gray-100 flex items-center justify-center">
+      <SignUpForm />
+    </div>
+  );
+}
