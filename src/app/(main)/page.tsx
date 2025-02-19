@@ -1,4 +1,4 @@
-import Header from "@/components/layout/header"
+import Header from "@/components/layout/header";
 
 export default async function Page() {
   return (
@@ -8,5 +8,5 @@ export default async function Page() {
         <p>this is the existing account</p>
       </div>
     </>
-  )
+  );
 }

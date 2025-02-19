@@ -1,6 +1,6 @@
 "use client";
 
-import { UserButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,13 +19,17 @@ export default function UserNav() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-          <UserButton
-            appearance={{
-              elements: {
-                userButtonAvatarBox: "h-10 w-10",
-              },
-            }}
+        <Button
+          variant="secondary"
+          className="relative h-10 w-[150px] hover:bg-gray-100 flex justify-start items-center gap-x-2 shrink-0    rounded-2xl  "
+        >
+          <span className="truncate text-lg text-gray-500">
+            {user?.emailAddresses[0].emailAddress ?? "hi" + user?.fullName}
+          </span>
+
+          <img
+            className="w-[20px] h-[20px] rounded-3xl "
+            src={user?.imageUrl}
           />
         </Button>
       </DropdownMenuTrigger>

@@ -15,3 +15,16 @@ model Account {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Products {
+  id                 String            @unique @default(cuid())
+  userId             String            @unique
+  title              String 
+  overview           String 
+  description        Json
+  price              Decimal
+  compareAtPrice     Decimal
+  media              Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt          
+}

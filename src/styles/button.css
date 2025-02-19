@@ -7,9 +7,8 @@
     rgba(255, 255, 255, 0)
   );
   border: 1px solid #1da1f2;
-  border-radius: 1rem;
-  box-shadow:
-    rgba(255, 255, 255, 0.15) 0 1px 0 inset,
+  border-radius: 0.5rem;
+  box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset,
     rgba(46, 54, 80, 0.075) 0 1px 1px;
   box-sizing: border-box;
   color: #ffffff;
@@ -23,11 +22,8 @@
   padding: 0.5rem 1rem;
   text-align: center;
   text-transform: none;
-  transition:
-    color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -47,10 +43,8 @@
 .button-primary:focus {
   background-color: #167fc1; /* More muted blue for focus */
   border-color: #126fa9;
-  box-shadow:
-    rgba(255, 255, 255, 0.15) 0 1px 0 inset,
-    rgba(46, 54, 80, 0.075) 0 1px 1px,
-    rgba(29, 161, 242, 0.5) 0 0 0 0.2rem;
+  box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset,
+    rgba(46, 54, 80, 0.075) 0 1px 1px, rgba(29, 161, 242, 0.5) 0 0 0 0.2rem;
 }
 
 .button-primary:active {
@@ -61,12 +55,79 @@
 }
 
 .button-primary:active:focus {
-  box-shadow:
-    rgba(46, 54, 80, 0.125) 0 3px 5px inset,
+  box-shadow: rgba(46, 54, 80, 0.125) 0 3px 5px inset,
     rgba(29, 161, 242, 0.5) 0 0 0 0.2rem;
 }
 
 .button-primary:disabled {
+  background-image: none;
+  box-shadow: none;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.button-secondary {
+  appearance: button;
+  background-color: #ffffff; /* BlueSky primary color */
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0)
+  );
+  border: 1px solid #ffffff;
+  border-radius: 1rem;
+  box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset,
+    rgba(46, 54, 80, 0.075) 0 1px 1px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  /* display: inline-block; */
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-transform: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  /* vertical-align: middle; */
+}
+
+.button-secondary:focus:not(:focus-visible),
+.button-secondary:focus {
+  outline: 0;
+}
+
+.button-secondary:hover {
+  background-color: #ffffff; /* Slightly darker blue */
+  border-color: #ffffff;
+}
+
+.button-secondary:focus {
+  background-color: #ffffff; /* More muted blue for focus */
+  border-color: #ffffff;
+  box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset,
+    rgba(46, 54, 80, 0.075) 0 1px 1px, rgba(29, 161, 242, 0.5) 0 0 0 0.2rem;
+}
+
+.button-secondary:active {
+  background-color: #ffffff; /* Darker blue for active state */
+  background-image: none;
+  border-color: #ffffff;
+  box-shadow: rgba(46, 54, 80, 0.125) 0 3px 5px inset;
+}
+
+.button-secondary:active:focus {
+  box-shadow: rgba(151, 153, 159, 0.125) 0 3px 5px inset,
+    rgba(231, 239, 244, 0.5) 0 0 0 0.2rem;
+}
+
+.button-secondary:disabled {
   background-image: none;
   box-shadow: none;
   opacity: 0.65;

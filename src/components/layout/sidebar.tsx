@@ -1,133 +1,155 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
   Workflow,
   Home,
+  ShoppingBag,
+  LayoutTemplate,
+  Store,
   Settings,
-  ChevronLeft,
-  LucideIcon,
+  Menu,
+  X,
+  User,
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
 
 interface SidebarItem {
   href: string;
-  icon: LucideIcon;
+  icon: React.ElementType;
   text: string;
 }
 
-const UserSkeleton = () => (
-  <div className="flex items-center space-x-4">
-    <div className="w-10 h-10 rounded-full bg-gray-200 animate-pulse" />
-    <div className="flex-1 min-w-0 space-y-2">
-      <div className="h-4 bg-gray-200 rounded animate-pulse w-24" />
-      <div className="h-3 bg-gray-200 rounded animate-pulse w-32" />
-    </div>
-  </div>
-);
-
 const SIDEBAR_ITEMS: SidebarItem[] = [
-  { href: "/dashboard", icon: Home, text: "Home" },
-  { href: "/dashboard/my-posts", icon: Workflow, text: "Products" },
-
-  { href: "/dashboard/settings", icon: Settings, text: "Orders" },
-  { href: "/dashboard/settings", icon: Settings, text: "Funnels" },
-  { href: "/dashboard/settings", icon: Settings, text: "Stores" },
+  { href: "/", icon: Home, text: "Home" },
+  { href: "/products", icon: ShoppingBag, text: "Products" },
+  { href: "/dashboard/orders", icon: Workflow, text: "Orders" },
+  { href: "/dashboard/funnels", icon: LayoutTemplate, text: "Funnels" },
+  { href: "/dashboard/stores", icon: Store, text: "Stores" },
 ];
 
-const Sidebar = ({
-  onClose,
-  className,
-}: {
-  onClose?: () => void;
-  className?: string;
-}) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+const Sidebar = () => {
+  const [isMobile, setIsMobile] = useState(false);
 
-  return (
-    <div
-      className={cn(
-        "relative z-20 flex flex-col h-full bg-gray-100 backdrop-blur-sm shadow-xl border-r border-gray-200 transition-all duration-300",
-        isCollapsed ? "w-[72px] p-2" : "w-56 p-4",
-        className
-      )}
-    >
-      {/* User Profile Section */}
-      <div className="mb-8">
-        <div
-          className={cn(
-            "flex items-center space-x-4 p-2 rounded-lg transition-colors",
-            "bg-gray-50/50 hover:bg-gray-100/50",
-            isCollapsed ? "justify-center" : "justify-start"
-          )}
-        >
-          <>
-            <div className="flex-1 min-w-0 overflow-hidden">
-              <p className="text-xl font-extrabold text-[#181818] truncate">
-                Aurwan
-              </p>
-            </div>
-          </>
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Initial check
+    checkIfMobile();
+
+    // Add event listener
+    window.addEventListener("resize", checkIfMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkIfMobile);
+  }, []);
+
+  const SidebarContent = ({ onItemClick = () => {} }) => (
+    <div className="flex flex-col h-full bg-[#f1f5f9] border-r  p-4">
+      <div className="flex items-start justify-start    h-[49px] ">
+        <div className="flex items-start  h-full text-sm   px-3">
+          <p className="text-xl  font-bold text-gray-900 dark:text-white">
+            Aurwan
+          </p>
         </div>
       </div>
 
-      {/* Navigation Items */}
-      <div className="flex-grow">
-        <ul className="space-y-2">
-          {SIDEBAR_ITEMS.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className={cn(
-                  buttonVariants({ variant: "ghost" }),
-                  `w-full group transition-all duration-200 ${
-                    isCollapsed ? "justify-center" : "justify-start"
-                  } flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-bold`,
-                  "text-[#181818] hover:bg-gray-100 hover:text-gray-900",
-                  "focus:ring-2 focus:ring-gray-200 focus:outline-none"
-                )}
-                onClick={onClose}
-              >
-                <item.icon
+      {/* Navigation */}
+      <nav className="">
+        <ul className="space-y-1">
+          {SIDEBAR_ITEMS.map((item) => {
+            const Icon = item.icon;
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
                   className={cn(
-                    "flex-shrink-0 transition-colors text-[#181818] group-hover:text-gray-700",
-                    isCollapsed ? "w-6 h-6" : "w-5 h-5"
+                    "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all",
+                    "text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+                    "dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white",
+                    "focus:outline-none focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900"
                   )}
-                />
-                {!isCollapsed && (
-                  <span className="truncate max-w-[180px]">{item.text}</span>
-                )}
-              </Link>
-            </li>
-          ))}
+                  onClick={onItemClick}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span>{item.text}</span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
-      </div>
+      </nav>
 
-      {/* Footer Section */}
-      <div className="mt-auto pt-4 border-t border-gray-200">
-        {/* Collapse Button */}
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
+      {/* Settings Button at the bottom */}
+      <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-800">
+        <Link
+          href="/dashboard/settings"
           className={cn(
-            "flex items-center justify-center w-full p-2 rounded-lg transition-all duration-300",
-            "text-gray-500 hover:text-gray-700 hover:bg-gray-100/50",
-            "focus:ring-2 focus:ring-gray-200 focus:outline-none"
+            "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all w-full",
+            "text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+            "dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white",
+            "focus:outline-none focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900"
           )}
-          aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          onClick={onItemClick}
         >
-          <ChevronLeft
-            className={cn(
-              "w-5 h-5 transition-transform duration-300",
-              isCollapsed ? "rotate-180" : ""
-            )}
-          />
-          {!isCollapsed && <span className="ml-2 text-sm">Collapse</span>}
-        </button>
+          <Settings className="w-5 h-5" />
+          <span>Settings</span>
+        </Link>
       </div>
     </div>
+  );
+
+  // Desktop view - persistent sidebar
+  if (!isMobile) {
+    return (
+      <div className="h-full w-64 border-r border-gray-200 dark:border-gray-800 hidden md:block">
+        <SidebarContent />
+      </div>
+    );
+  }
+
+  // Mobile view - Sheet component
+  return (
+    <>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="fixed top-4 left-4 z-40 md:hidden"
+        aria-label="Open menu"
+      >
+        <Sheet>
+          <SheetTrigger asChild>
+            <Menu className="h-6 w-6" />
+          </SheetTrigger>
+          <SheetContent side="left" className="p-0 w-64">
+            <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+              <X className="h-4 w-4" />
+              <span className="sr-only">Close</span>
+            </SheetClose>
+            <SidebarContent
+              onItemClick={() =>
+                document
+                  .querySelector<HTMLButtonElement>(
+                    '[data-state="open"] button.rounded-sm'
+                  )
+                  ?.click()
+              }
+            />
+          </SheetContent>
+        </Sheet>
+      </Button>
+    </>
   );
 };
 
