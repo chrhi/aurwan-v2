@@ -5,6 +5,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { prisma as db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
+import { fork } from "node:child_process";
 
 // Custom error for unauthorized access
 class UnauthorizedError extends Error {
@@ -83,13 +84,14 @@ export async function createProduct(formData: {
         price: formData.price,
         compareAtPrice: formData.compareAtPrice,
         media: formData.media,
+        status: "ACTIVE",
       },
     });
 
-    revalidatePath("/products");
     return { data: product };
   } catch (error) {
-    return { error: "Failed to create product" };
+    console.log(error);
+    return { error };
   }
 }
 

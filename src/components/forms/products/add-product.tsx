@@ -106,7 +106,10 @@ export default function AddProduct() {
       const result = await createProduct(formattedValues);
 
       if (result.error) {
-        setError(result.error);
+        //@ts-expect-error this is an errro
+        setError(result?.error);
+
+        console.log(result.error);
         return;
       }
 
