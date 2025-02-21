@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -11,7 +10,6 @@ import {
   Settings,
   Menu,
   X,
-  User,
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -56,17 +54,15 @@ const Sidebar = () => {
   }, []);
 
   const SidebarContent = ({ onItemClick = () => {} }) => (
-    <div className="flex flex-col h-full bg-[#f1f5f9] border-r  p-4">
-      <div className="flex items-start justify-start    h-[49px] ">
-        <div className="flex items-start  h-full text-sm   px-3">
-          <p className="text-xl  font-bold text-gray-900 dark:text-white">
-            Aurwan
-          </p>
-        </div>
+    <div className="flex flex-col h-full bg-zinc-100   ">
+      <div className="flex items-center justify-start  border-b pl-4  h-14 ">
+        <p className="text-xl  font-bold text-black dark:text-white">
+          CraftedNext
+        </p>
       </div>
 
       {/* Navigation */}
-      <nav className="">
+      <nav className="p-2 py-4">
         <ul className="space-y-1">
           {SIDEBAR_ITEMS.map((item) => {
             const Icon = item.icon;
@@ -82,7 +78,7 @@ const Sidebar = () => {
                   )}
                   onClick={onItemClick}
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-4 h-4" />
                   <span>{item.text}</span>
                 </Link>
               </li>
@@ -92,7 +88,7 @@ const Sidebar = () => {
       </nav>
 
       {/* Settings Button at the bottom */}
-      <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-800">
+      <div className="mt-auto pt-4  border-t border-gray-200 dark:border-gray-800">
         <Link
           href="/dashboard/settings"
           className={cn(
@@ -113,7 +109,7 @@ const Sidebar = () => {
   // Desktop view - persistent sidebar
   if (!isMobile) {
     return (
-      <div className="h-full w-64 border-r border-gray-200 dark:border-gray-800 hidden md:block">
+      <div className="h-full w-56  hidden md:block">
         <SidebarContent />
       </div>
     );
@@ -125,7 +121,7 @@ const Sidebar = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="fixed top-4 left-4 z-40 md:hidden"
+        className="fixed top-4 left-4 z-[999] md:hidden"
         aria-label="Open menu"
       >
         <Sheet>
@@ -133,7 +129,7 @@ const Sidebar = () => {
             <Menu className="h-6 w-6" />
           </SheetTrigger>
           <SheetContent side="left" className="p-0 w-64">
-            <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+            <SheetClose className="absolute right-4  top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
               <X className="h-4 w-4" />
               <span className="sr-only">Close</span>
             </SheetClose>

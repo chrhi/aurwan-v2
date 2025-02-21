@@ -20,7 +20,7 @@ model Products {
   id                 String            @unique @default(cuid())
   userId             String            @unique
   title              String 
-  overview           String 
+  status             String           @default("ACTIVE")
   description        Json
   price              Decimal
   compareAtPrice     Decimal

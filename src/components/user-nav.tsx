@@ -21,16 +21,12 @@ export default function UserNav() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="secondary"
-          className="relative h-10 w-[150px] hover:bg-gray-100 flex justify-start items-center gap-x-2 shrink-0    rounded-2xl  "
+          className="relative h-10 w-[200px] hover:bg-gray-100 flex justify-start items-center gap-x-2 shrink-0    rounded-lg bg-white border  "
         >
-          <span className="truncate text-lg text-gray-500">
+          <img className="w-[25px] h-[25px] rounded-lg " src={user?.imageUrl} />
+          <span className="truncate text-sm text-gray-500">
             {user?.emailAddresses[0].emailAddress ?? "hi" + user?.fullName}
           </span>
-
-          <img
-            className="w-[20px] h-[20px] rounded-3xl "
-            src={user?.imageUrl}
-          />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>

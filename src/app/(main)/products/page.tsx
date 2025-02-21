@@ -1,20 +1,32 @@
+import { getProducts } from "@/actions/product.actions";
 import Header from "@/components/layout/header";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
-import { Payment, columns } from "@/components/tables/columns";
+import { Product, columns } from "@/components/tables/columns";
 import { DataTable } from "@/components/tables/data-table";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
-async function getData(): Promise<Payment[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    // ...
-  ];
+async function getData(): Promise<Product[]> {
+  const { data } = await getProducts();
+
+  if (!data) {
+    return [];
+  }
+
+  const products = data?.map((item) => {
+    return {
+      id: item.id,
+      status: "Active",
+      price: Number(item.price),
+      title: item.title,
+      //@ts-expect-error this urls exists
+      media: item.media?.urls[0] as string,
+      createdAt: item.createdAt,
+    };
+  });
+
+  return products;
 }
 
 export default async function Page() {
@@ -25,9 +37,11 @@ export default async function Page() {
       <Header title="Products" />
       <MaxWidthWrapper className="my-10">
         <div className="w-full h-[50px] flex items-center justify-between ">
-          <h2 className="text-3xl font-bold ">All Products </h2>
+          <h2 className="text-xl font-bold ">All Products </h2>
 
-          <Button>Add new product</Button>
+          <Link className={cn(buttonVariants())} href={"/products/new"}>
+            Add new product
+          </Link>
         </div>
         <div className=" py-4">
           <DataTable columns={columns} data={data} />
