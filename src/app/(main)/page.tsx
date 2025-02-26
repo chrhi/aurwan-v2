@@ -8,7 +8,6 @@ const Page = () => {
     <>
       <Header title="Dashboard" />
       <MaxWidthWrapper className="mt-4 pb-16">
-        {/* Stats Cards */}
         <div className="w-full h-fit my-4 flex items-center justify-start ">
           <p className="font-bold text-2xl">hello , this is your dashboard </p>
         </div>
