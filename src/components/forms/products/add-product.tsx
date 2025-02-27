@@ -325,7 +325,7 @@ export default function AddProduct() {
           </Card>
         </div>
         <div className="w-full h-[70px] border-t mt-4">
-          <MaxWidthWrapper className="flex items-center h-full justify-end gap-x-4">
+          <MaxWidthWrapper className="flex w-full items-center h-full justify-end gap-x-4">
             <Button
               variant="outline"
               type="button"
