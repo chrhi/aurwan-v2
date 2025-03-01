@@ -1,7 +1,15 @@
+import AnnouncementBar from "./components/announcement-bar";
+import Banner from "./components/banner";
+import ProductsRow from "./components/products-row";
+import StoreHeader from "./components/store-header";
+
 export default function Page() {
   return (
-    <div>
-      <h1>this is the store page</h1>
-    </div>
+    <>
+      <AnnouncementBar />
+      <StoreHeader />
+      <Banner />
+      <ProductsRow title="Latest Product" />
+    </>
   );
 }
