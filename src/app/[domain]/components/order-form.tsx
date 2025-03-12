@@ -25,6 +25,7 @@ import { getAllWilayats, getCommunesByWilaya } from "@/lib/utils";
 import { Commune } from "@/types";
 import { createOrder } from "@/actions/order.actions";
 import { useRouter } from "next/navigation";
+import { fbEvents } from "@/lib/pixel";
 
 // Define the form schema with Zod
 const formSchema = z.object({
@@ -44,6 +45,14 @@ const formSchema = z.object({
     message: "الكمية يجب أن تكون على الأقل 1.",
   }),
 });
+
+const productInfo = {
+  content_name: "منظم مستحضرات التجميل الأكريليكي الشفاف",
+  content_ids: ["organizer123"], // Replace with your actual product ID
+  content_type: "product",
+  value: 3900,
+  currency: "DZD",
+};
 
 export function OrderProductForm() {
   const [communes, setCommunes] = useState<Commune[]>([]);
@@ -67,6 +76,15 @@ export function OrderProductForm() {
   const selectedWilaya = form.watch("wilaya");
 
   useEffect(() => {
+    // Track InitiateCheckout when form is loaded
+    fbEvents.initiateCheckout({
+      ...productInfo,
+      num_items: 1,
+    });
+    //isserpubg123mahdI@
+  }, []);
+
+  useEffect(() => {
     if (selectedWilaya) {
       try {
         const communesList = getCommunesByWilaya(selectedWilaya);
@@ -87,6 +105,16 @@ export function OrderProductForm() {
     setLoading(true);
 
     try {
+      // Calculate total value based on quantity
+      const totalValue = productInfo.value * values.quantity;
+
+      // Track Lead event when form is submitted
+      fbEvents.lead({
+        content_name: productInfo.content_name,
+        content_category: "cosmetic_organizer",
+        value: totalValue,
+        currency: productInfo.currency,
+      });
       await createOrder({
         address: "",
         city: values.commune,
@@ -97,6 +125,15 @@ export function OrderProductForm() {
         wilaya_name:
           wilayats.find((item) => item.code === values.wilaya)?.name ??
           values.wilaya,
+      });
+      // Track Purchase event after successful order creation
+      fbEvents.purchase({
+        content_ids: productInfo.content_ids,
+        content_name: productInfo.content_name,
+        content_type: "product",
+        value: totalValue,
+        currency: productInfo.currency,
+        num_items: values.quantity,
       });
       router.push("/thank-you");
 

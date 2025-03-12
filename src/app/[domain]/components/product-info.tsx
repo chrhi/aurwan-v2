@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
 import { OrderProductForm } from "./order-form";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Truck, ShieldCheck, Clock, ThumbsUp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { initFacebookPixel, fbEvents } from "@/lib/pixel";
 
 export default function ProductInfo() {
   const [selectedImage, setSelectedImage] = useState("/image-03.jpg");
@@ -18,6 +19,22 @@ export default function ProductInfo() {
     "/image-03.jpg",
     "/image-04.jpg",
   ];
+
+  const productInfo = {
+    content_name: "منظم مستحضرات التجميل الأكريليكي الشفاف",
+    content_ids: ["organizer123"], // Replace with your actual product ID
+    content_type: "product",
+    value: 3900,
+    currency: "DZD",
+  };
+
+  useEffect(() => {
+    // Initialize Facebook Pixel
+    initFacebookPixel();
+
+    // Track ViewContent event when the product page is loaded
+    fbEvents.viewContent(productInfo);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!isZoomed) return;

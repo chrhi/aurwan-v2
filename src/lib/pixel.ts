@@ -6,13 +6,7 @@ const FACEBOOK_PIXEL_ID = "630224289621963";
 // Initialize Facebook Pixel
 export const initFacebookPixel = () => {
   if (typeof window !== "undefined") {
-    const advancedMatching = {}; // You can add customer information here if available
-    const options = {
-      autoConfig: true,
-      debug: process.env.NODE_ENV !== "production",
-    };
-
-    ReactPixel.init(FACEBOOK_PIXEL_ID, advancedMatching, options);
+    ReactPixel.init(FACEBOOK_PIXEL_ID);
   }
 };
 

@@ -3,14 +3,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Header from "@/components/layout/header";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
 import { getAccountAction } from "@/actions/auth.actions";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 
 const Page = async () => {
   const user = await getAccountAction();
 
-  if (!user) {
-    redirect("/sign-in");
-  }
+  // if (!user) {
+  //   redirect("/sign-in");
+  // }
 
   return (
     <>
