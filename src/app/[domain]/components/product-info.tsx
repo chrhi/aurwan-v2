@@ -155,17 +155,9 @@ export default function ProductInfo() {
             <OrderProductForm />
           </div>
 
-          {/* Customer count indicator - social proof */}
-          <div className="bg-rose-50 p-3 rounded-md text-center my-2">
-            <p className="text-rose-700 font-medium text-sm">
-              👀 53 شخص يشاهدون هذا المنتج الآن | ✓ تم بيع 312 خلال 24 ساعة
-              الماضية
-            </p>
-          </div>
-
           {/* Product information tabs */}
           <Tabs defaultValue="description" className="w-full mt-4">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="description">الوصف</TabsTrigger>
               <TabsTrigger value="benefits">المميزات</TabsTrigger>
             </TabsList>
