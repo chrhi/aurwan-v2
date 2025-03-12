@@ -1,7 +1,7 @@
 import { getProducts } from "@/actions/product.actions";
 import Header from "@/components/layout/header";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
-import { columns } from "@/components/tables/columns";
+import { ProductsColumns } from "@/components/tables/products-columns";
 import { DataTable } from "@/components/tables/data-table";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -45,7 +45,7 @@ export default async function Page() {
           </Link>
         </div>
         <div className=" py-4">
-          <DataTable columns={columns} data={data} />
+          <DataTable columns={ProductsColumns} data={data} />
         </div>
       </MaxWidthWrapper>
     </>

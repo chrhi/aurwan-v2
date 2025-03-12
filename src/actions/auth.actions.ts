@@ -64,7 +64,7 @@ export async function getAccountAction(): Promise<AccountWithClerkData | null> {
 
     // Check authentication
     if (!userId) {
-      redirect("/sign-in");
+      return null;
     }
 
     // Get Clerk user data

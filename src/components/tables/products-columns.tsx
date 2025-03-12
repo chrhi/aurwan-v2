@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
@@ -15,7 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Product } from "@/types";
 
-export const columns: ColumnDef<Product>[] = [
+export const ProductsColumns: ColumnDef<Product>[] = [
   {
     id: "select",
     header: ({ table }) => (

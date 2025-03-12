@@ -23,6 +23,8 @@ import {
 } from "@/components/ui/select";
 import { getAllWilayats, getCommunesByWilaya } from "@/lib/utils";
 import { Commune } from "@/types";
+import { createOrder } from "@/actions/order.actions";
+import { useRouter } from "next/navigation";
 
 // Define the form schema with Zod
 const formSchema = z.object({
@@ -44,12 +46,12 @@ const formSchema = z.object({
 });
 
 export function OrderProductForm() {
-  // State for communes based on selected wilaya
   const [communes, setCommunes] = useState<Commune[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
   // Get all wilayats
   const wilayats = getAllWilayats();
 
-  // Define your form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -81,9 +83,28 @@ export function OrderProductForm() {
   }, [selectedWilaya, form]);
 
   // Define a submit handler
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true);
+
+    try {
+      await createOrder({
+        address: "",
+        city: values.commune,
+        full_name: values.fullName,
+        phone_number: Number(values.phoneNumber),
+        quantity: values.quantity,
+        wilaya_code: Number(values.wilaya),
+        wilaya_name:
+          wilayats.find((item) => item.code === values.wilaya)?.name ??
+          values.wilaya,
+      });
+      router.push("/thank-you");
+
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+    }
   }
 
   return (
@@ -168,7 +189,7 @@ export function OrderProductForm() {
                     {communes.map((commune) => (
                       <SelectItem
                         key={commune.id}
-                        value={commune.id.toString()}
+                        value={commune.name.toString()}
                       >
                         {commune.name}
                       </SelectItem>
@@ -232,6 +253,7 @@ export function OrderProductForm() {
 
         <div className="flex gap-3">
           <Button
+            disabled={loading}
             size="lg"
             type="submit"
             className="w-full h-14 rounded-2xl hover:bg-rose-800 bg-rose-600 font-extrabold text-white"

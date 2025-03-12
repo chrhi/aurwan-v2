@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-   
 }
 
 datasource db {
@@ -9,29 +8,45 @@ datasource db {
 }
 
 model Account {
-  id                 String            @unique @default(cuid())
-  userId             String            @unique
-  
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  products  Products[]  // One-to-Many relationship
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Products {
-  id                 String            @unique @default(cuid())
-  userId             String            @unique
-  title              String 
-  status             String           @default("ACTIVE")
-  description        Json
-  price              Decimal
-  compareAtPrice     Decimal
-  media              Json
+  id             String   @id @default(cuid())
+  userId         String   // Foreign key to Account
+  title          String 
+  status         String   @default("ACTIVE")
+  description    Json
+  price          Decimal
+  compareAtPrice Decimal
+  media          Json
+  orderId        String?  // Foreign key to Order (Nullable)
+  
+  account       Account @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  order         Order?  @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt          
+  updatedAt DateTime @updatedAt
 }
 
 model Order {
-    id                 String            @unique @default(cuid())
+  id            String   @id @default(cuid())
+  full_name     String 
+  phone_number  Int 
+  wilaya_code   Int 
+  wilaya_name   String 
+  city          String 
+  address       String 
+  quantity      Int      @default(1)
+     status            String   @default("PENDING") // Added status field
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt 
+  products      Products[] // One-to-Many relationship
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt 
 }

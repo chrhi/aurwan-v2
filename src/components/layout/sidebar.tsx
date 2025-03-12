@@ -1,15 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import {
-  Workflow,
-  Home,
-  ShoppingBag,
-  LayoutTemplate,
-  Store,
-  Menu,
-  X,
-} from "lucide-react";
+import { Workflow, Home, ShoppingBag, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -30,9 +22,9 @@ interface SidebarItem {
 const SIDEBAR_ITEMS: SidebarItem[] = [
   { href: "/", icon: Home, text: "Home" },
   { href: "/products", icon: ShoppingBag, text: "Products" },
-  { href: "/dashboard/orders", icon: Workflow, text: "Orders" },
-  { href: "/dashboard/funnels", icon: LayoutTemplate, text: "Funnels" },
-  { href: "/dashboard/stores", icon: Store, text: "Stores" },
+  { href: "/orders", icon: Workflow, text: "Orders" },
+  // { href: "/dashboard/funnels", icon: LayoutTemplate, text: "Funnels" },
+  // { href: "/dashboard/stores", icon: Store, text: "Stores" },
 ];
 
 const Sidebar = () => {

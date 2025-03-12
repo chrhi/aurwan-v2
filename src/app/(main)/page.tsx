@@ -2,14 +2,24 @@ import { DollarSign, ShoppingCart, TrendingUp, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Header from "@/components/layout/header";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
+import { getAccountAction } from "@/actions/auth.actions";
+import { redirect } from "next/navigation";
 
-const Page = () => {
+const Page = async () => {
+  const user = await getAccountAction();
+
+  if (!user) {
+    redirect("/sign-in");
+  }
+
   return (
     <>
       <Header title="Dashboard" />
       <MaxWidthWrapper className="mt-4 pb-16">
         <div className="w-full h-fit my-4 flex items-center justify-start ">
-          <p className="font-bold text-2xl">hello , this is your dashboard </p>
+          <p className="font-bold text-2xl">
+            hello {user?.firstName} , this is your dashboard{" "}
+          </p>
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>

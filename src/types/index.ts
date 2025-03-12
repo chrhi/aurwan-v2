@@ -10,13 +10,16 @@ export type Product = {
 
 export type Order = {
   id: string;
-  status: string;
-  price: number;
-  title: string;
-  media: string;
-  createdAt: any;
+  full_name: string;
+  phone_number: number;
+  wilaya_code: number;
+  wilaya_name: string;
+  city: string;
+  address: string;
+  quantity: number;
+  status: "PENDING" | "SHIPPED" | "DELIVERED" | "CANCELLED"; // Order status
+  createdAt: string;
 };
-
 export type LocationItem = {
   id: number;
   commune_name_ascii: string;

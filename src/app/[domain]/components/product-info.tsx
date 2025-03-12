@@ -5,36 +5,20 @@ import MaxWidthWrapper from "@/components/max-width-wrapper";
 import { OrderProductForm } from "./order-form";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Star, Truck, ShieldCheck, Clock, ThumbsUp } from "lucide-react";
+import { Truck, ShieldCheck, Clock, ThumbsUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function ProductInfo() {
   const [selectedImage, setSelectedImage] = useState("/image-03.jpg");
   const [isZoomed, setIsZoomed] = useState(false);
 
-  const testimonials = [
-    {
-      name: "سارة م.",
-      rating: 5,
-      comment:
-        "منتج رائع! لاحظت تحسناً كبيراً في بشرتي بعد أسبوع واحد فقط من الاستخدام.",
-    },
-    {
-      name: "فاطمة ع.",
-      rating: 5,
-      comment: "جودة استثنائية بسعر معقول. سأطلب مرة أخرى بالتأكيد!",
-    },
-    {
-      name: "ليلى ح.",
-      rating: 4,
-      comment: "تغليف أنيق والمنتج فعال جداً. أنصح به بشدة.",
-    },
+  const productImages = [
+    "/image-01.jpg",
+    "/image-02.jpg",
+    "/image-03.jpg",
+    "/image-04.jpg",
   ];
 
-  // Product images - for gallery
-  const productImages = ["/image-01.jpg", "/image-02.jpg", "/image-03.jpg"];
-
-  // Handle zoom effect on image hover
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!isZoomed) return;
 
@@ -72,7 +56,7 @@ export default function ProductInfo() {
             {!isZoomed && (
               <img
                 src={selectedImage}
-                alt="Luxury Cosmetics"
+                alt="منظم مستحضرات التجميل الأكريليكي"
                 className="w-full h-full object-cover"
               />
             )}
@@ -101,7 +85,7 @@ export default function ProductInfo() {
               >
                 <img
                   src={img}
-                  alt={`Thumbnail ${index + 1}`}
+                  alt={`صورة مصغرة ${index + 1}`}
                   className="w-full h-full object-cover rounded"
                 />
               </div>
@@ -109,50 +93,21 @@ export default function ProductInfo() {
           </div>
         </div>
 
-        {/* Product Details Section */}
         <div className="w-full h-full flex flex-col gap-y-6 md:pt-4">
-          {/* Product Category + Title */}
           <div className="text-right">
-            <p className="text-rose-600 text-sm font-medium mb-1">
-              مستحضرات التجميل الطبيعية
-            </p>
             <h1 className="font-bold text-3xl md:text-4xl">
-              مواد التجميل الفاخرة
+              منظم مستحضرات التجميل الأكريليكي الشفاف
             </h1>
           </div>
 
-          {/* Star Rating - social proof */}
-          <div className="flex items-center justify-end gap-2">
-            <span className="text-sm text-gray-600">(126 تقييم)</span>
-            <div className="flex">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <Star
-                  key={star}
-                  className="h-4 w-4 fill-amber-500 text-amber-500"
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Pricing with discount - anchor pricing */}
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-3 justify-end">
-              <span className="text-gray-500 line-through text-lg">
-                10000 DZ
-              </span>
               <span className="text-2xl font-bold text-right text-rose-600">
-                5000 DZ
+                3900 DZ
               </span>
-            </div>
-            <div className="flex justify-end items-center gap-2">
-              <p className="text-green-600 text-right text-sm font-medium">
-                وفر 50٪ - عرض لفترة محدودة
-              </p>
-              <Badge className="bg-green-600">-50%</Badge>
             </div>
           </div>
 
-          {/* Trust badges - reduce purchase anxiety */}
           <div className="grid grid-cols-2 gap-3 my-2">
             <div className="flex items-center gap-2 justify-end border rounded-md p-2">
               <span className="text-sm font-medium text-right">شحن سريع</span>
@@ -195,87 +150,54 @@ export default function ProductInfo() {
           <Tabs defaultValue="description" className="w-full mt-4">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="description">الوصف</TabsTrigger>
-              <TabsTrigger value="benefits">الفوائد</TabsTrigger>
-              <TabsTrigger value="reviews">التقييمات</TabsTrigger>
+              <TabsTrigger value="benefits">المميزات</TabsTrigger>
             </TabsList>
 
             <TabsContent value="description" className="text-right mt-4">
               <p className="text-gray-600">
-                مجموعة مستحضرات التجميل الفاخرة مصنوعة من أجود المكونات
-                الطبيعية. تتميز منتجاتنا بتركيبة خالية من المواد الكيميائية
-                الضارة وغير مختبرة على الحيوانات. مثالية للبشرة الحساسة وتوفر
-                نتائج مذهلة ودائمة.
+                يمكن لحامل العرض الأكريليكي الشفاف هذا عرض وتخزين جميع مستحضرات
+                التجميل والمجوهرات بسهولة دون الحاجة إلى البحث في كل مكان. إنه
+                منتج مثالي ليس فقط للحمام أو الغرور، بل مثالي للاستخدام في
+                المنزل أو في مراكز التجميل أو المنتجعات الصحية.
               </p>
 
               <ul className="list-disc list-inside space-y-1 mr-4 mt-3">
                 <li className="text-gray-600">
-                  خالية من البارابين والعطور الاصطناعية
+                  مصنوع من مادة ABS عالية الجودة ومتينة
                 </li>
-                <li className="text-gray-600">مناسبة لجميع أنواع البشرة</li>
-                <li className="text-gray-600">تدوم طوال اليوم</li>
-                <li className="text-gray-600">مصنوعة من مكونات مستدامة</li>
+                <li className="text-gray-600">شفاف لرؤية محتوياته بسهولة</li>
+                <li className="text-gray-600">
+                  تصميم أنيق يناسب جميع الديكورات
+                </li>
+                <li className="text-gray-600">سهل التنظيف والصيانة</li>
               </ul>
             </TabsContent>
 
             <TabsContent value="benefits" className="text-right mt-4">
               <div className="space-y-4">
                 <div className="space-y-1">
-                  <h4 className="font-semibold">تجديد البشرة</h4>
+                  <h4 className="font-semibold">ثلاثة أدراج واسعة</h4>
                   <p className="text-gray-600">
-                    تعمل مكوناتنا الطبيعية على تجديد خلايا البشرة وإعادة نضارتها
-                    خلال أسبوعين من الاستخدام المنتظم.
+                    مع 3 أدراج، يمكنك وضع الكثير من مستحضرات التجميل مثل
+                    المستحضر، واللوشن، وأحمر الشفاه، وظلال العيون، والفرشاة،
+                    والقناع. تقليل مساحة المقعد.
                   </p>
                 </div>
 
                 <div className="space-y-1">
-                  <h4 className="font-semibold">ترطيب عميق</h4>
+                  <h4 className="font-semibold">غطاء مقاوم للغبار والماء</h4>
                   <p className="text-gray-600">
-                    توفر تركيبتنا الفريدة ترطيباً يدوم لمدة 24 ساعة، مما يجعل
-                    البشرة ناعمة ومشرقة.
+                    احمي مستحضرات التجميل الخاصة بك باستخدام غطاء شفاف مقاوم
+                    للغبار والماء.
                   </p>
                 </div>
 
                 <div className="space-y-1">
-                  <h4 className="font-semibold">حماية من العوامل البيئية</h4>
+                  <h4 className="font-semibold">سهولة الوصول والتنقل</h4>
                   <p className="text-gray-600">
-                    تحتوي على مضادات أكسدة طبيعية تحمي البشرة من التلوث والأشعة
-                    فوق البنفسجية.
-                  </p>
-                </div>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="reviews" className="mt-4">
-              <div className="space-y-4">
-                {testimonials.map((review, index) => (
-                  <div key={index} className="border-b pb-3">
-                    <div className="flex justify-between items-center">
-                      <div className="flex">
-                        {Array(5)
-                          .fill(0)
-                          .map((_, i) => (
-                            <Star
-                              key={i}
-                              className={cn(
-                                "h-4 w-4",
-                                i < review.rating
-                                  ? "fill-amber-500 text-amber-500"
-                                  : "text-gray-200"
-                              )}
-                            />
-                          ))}
-                      </div>
-                      <p className="font-medium text-right">{review.name}</p>
-                    </div>
-                    <p className="text-gray-600 text-right mt-1">
-                      {review.comment}
-                    </p>
-                  </div>
-                ))}
-
-                <div className="text-center">
-                  <p className="text-rose-600 font-medium cursor-pointer">
-                    عرض جميع التقييمات (126)
+                    افتح وأغلق الغطاء في كلا الاتجاهين لتسهيل الوصول. تصميم
+                    المقبض المنحني الإبداعي سهل الاستخدام ويمكن حمله في اليد
+                    لسهولة الحركة.
                   </p>
                 </div>
               </div>
@@ -289,18 +211,19 @@ export default function ProductInfo() {
         <h3 className="text-xl font-bold text-right mb-4">الأسئلة الشائعة</h3>
         <div className="space-y-3">
           <div className="border rounded-lg p-3">
-            <p className="font-medium text-right">كم المدة المتوقعة للتوصيل؟</p>
+            <p className="font-medium text-right">ما هي أبعاد المنظم؟</p>
             <p className="text-gray-600 text-right mt-1">
-              يتم التوصيل عادة خلال 2-3 أيام عمل لجميع مناطق الجزائر.
+              المنظم مناسب لمعظم المساحات، بأبعاد تسمح بتخزين مجموعة متنوعة من
+              مستحضرات التجميل.
             </p>
           </div>
           <div className="border rounded-lg p-3">
             <p className="font-medium text-right">
-              هل المنتج مناسب للبشرة الحساسة؟
+              هل يمكن استخدامه للمجوهرات أيضاً؟
             </p>
             <p className="text-gray-600 text-right mt-1">
-              نعم، جميع منتجاتنا مختبرة ومناسبة لجميع أنواع البشرة بما فيها
-              البشرة الحساسة.
+              نعم، المنظم مثالي لتخزين وعرض المجوهرات والإكسسوارات الصغيرة
+              بالإضافة إلى مستحضرات التجميل.
             </p>
           </div>
           <div className="border rounded-lg p-3">
