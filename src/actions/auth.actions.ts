@@ -60,13 +60,6 @@ export async function syncAccountAction(): Promise<boolean> {
  */
 export async function getAccountAction(): Promise<AccountWithClerkData | null> {
   try {
-    const { userId } = await auth();
-
-    // Check authentication
-    if (!userId) {
-      return null;
-    }
-
     // Get Clerk user data
     const user = await currentUser();
 
@@ -77,7 +70,7 @@ export async function getAccountAction(): Promise<AccountWithClerkData | null> {
     // Get account from database
     const account = await prisma.account.findUnique({
       where: {
-        userId,
+        userId: user.id,
       },
     });
 
