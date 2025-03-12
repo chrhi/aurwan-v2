@@ -1,7 +1,20 @@
+"use client";
+
 import StoreHeader from "../components/store-header";
 import { Check, CheckCircle, Phone, Clock } from "lucide-react";
+import { fbEvents } from "@/lib/pixel";
+import { useEffect } from "react";
 
 export default function Page() {
+  useEffect(() => {
+    // Track CompleteRegistration event when thank you page loads
+    fbEvents.completeRegistration({
+      content_name: "Acrylic Makeup Organizer Order",
+      value: 3900,
+      currency: "DZD",
+    });
+  }, []);
+
   return (
     <>
       <div className="" dir="rtl">
