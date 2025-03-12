@@ -13,15 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-
-export type Product = {
-  id: string;
-  status: string;
-  price: number;
-  title: string;
-  media: string;
-  createdAt: any;
-};
+import { Product } from "@/types";
 
 export const columns: ColumnDef<Product>[] = [
   {

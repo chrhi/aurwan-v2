@@ -1,10 +1,11 @@
 import { getProducts } from "@/actions/product.actions";
 import Header from "@/components/layout/header";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
-import { Product, columns } from "@/components/tables/columns";
+import { columns } from "@/components/tables/columns";
 import { DataTable } from "@/components/tables/data-table";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Product } from "@/types";
 import Link from "next/link";
 
 async function getData(): Promise<Product[]> {
