@@ -48,7 +48,7 @@ const formSchema = z.object({
 
 const productInfo = {
   content_name: "منظم مستحضرات التجميل الأكريليكي الشفاف",
-  content_ids: ["organizer123"], // Replace with your actual product ID
+  content_ids: ["cm86f53ti0001wmkkernjxr7s"],
   content_type: "product",
   value: 3900,
   currency: "DZD",
