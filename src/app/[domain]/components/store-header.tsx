@@ -5,7 +5,7 @@ export default function StoreHeader() {
     <div dir="ltr" className="w-full h-[60px]  border-b ">
       <MaxWidthWrapper className="h-full">
         <div className="w-full h-full flex items-center justify-between">
-          <p className="text-rose-950 italic font-bold text-xl">LuxeVanity</p>
+          <p className="text-black italic font-bold text-xl">Chamse store</p>
         </div>
       </MaxWidthWrapper>
     </div>

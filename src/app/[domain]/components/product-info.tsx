@@ -113,7 +113,7 @@ export default function ProductInfo() {
         <div className="w-full h-full flex flex-col gap-y-6 md:pt-4">
           <div className="text-right">
             <h1 className="font-bold text-3xl md:text-4xl">
-              منظم مستحضرات التجميل الأكريليكي الشفاف
+              منظم مستحضرات التجميل
             </h1>
           </div>
 
