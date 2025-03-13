@@ -89,7 +89,7 @@ export function SignInForm() {
   }
 
   return (
-    <Card className="w-[480px] pt-4 min-h-[501.39px] h-fit">
+    <Card className="w-[480px] pt-4 min-h-[501.39px] h-fit mx-auto">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>Welcome Back!</CardTitle>

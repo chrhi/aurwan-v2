@@ -4,13 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useSignUp } from "@clerk/nextjs";
 import React from "react";
 import {
@@ -70,14 +64,7 @@ export function SignUpForm() {
   }
 
   return (
-    <Card className="w-[480px] pt-4 min-h-[501.39px] h-fit">
-      <CardHeader>
-        <CardTitle>Create New Account</CardTitle>
-        <CardDescription>
-          Create a new account and enjoy a 14-day free trial with no credit card
-          or hidden fees.
-        </CardDescription>
-      </CardHeader>
+    <Card className="w-[480px] pt-4 min-h-[501.39px]  mx-auto h-fit">
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
