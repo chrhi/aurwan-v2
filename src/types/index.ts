@@ -44,3 +44,18 @@ export type Commune = {
   daira_name_ascii: string;
   daira_name: string;
 };
+
+export type Store = {
+  name: string;
+  color: string;
+  lang: string;
+  admins: any;
+  id: string;
+};
+
+export type User = {
+  email: string;
+  avatar: string;
+  name: string;
+  id: string;
+};

@@ -3,6 +3,7 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
+import { User } from "@/types";
 
 export type AccountWithClerkData = {
   id: string;
@@ -58,7 +59,7 @@ export async function syncAccountAction(): Promise<boolean> {
 /**
  * Gets the user's account data including Clerk profile information
  */
-export async function getAccountAction(): Promise<AccountWithClerkData | null> {
+export async function getAccountAction(): Promise<User | null> {
   try {
     // Get Clerk user data
     const user = await currentUser();
@@ -80,11 +81,10 @@ export async function getAccountAction(): Promise<AccountWithClerkData | null> {
 
     // Combine database account with Clerk user data
     return {
-      ...account,
       email: user.emailAddresses[0]?.emailAddress ?? null,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      imageUrl: user.imageUrl,
+      name: `${user.firstName} ${user.lastName}`,
+      avatar: user.imageUrl,
+      id: user.id,
     };
   } catch (error) {
     console.error("Error getting account:", error);

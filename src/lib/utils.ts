@@ -28,6 +28,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export function getAppBaseUrl() {
+  const baseUrl =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://app.craftednext.com";
+
+  return baseUrl;
+}
+
 export function deleteAllCookies() {
   // Get all the cookies for the current site
   const cookies = document.cookie.split(";");

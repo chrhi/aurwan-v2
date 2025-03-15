@@ -2,13 +2,21 @@ import { Search } from "lucide-react";
 import UserNav from "../user-nav";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { Store as Tstore, User as Tuser } from "@/types";
 
 interface HeaderProps {
   title: string;
   className?: string;
+  stores: Tstore[];
+  user: Tuser;
 }
 
-export default function Header({ title, className }: HeaderProps) {
+export default function Header({
+  title,
+  className,
+  stores,
+  user,
+}: HeaderProps) {
   return (
     <header
       className={cn(
@@ -29,7 +37,7 @@ export default function Header({ title, className }: HeaderProps) {
         </div>
 
         <div className="flex items-center gap-4">
-          <UserNav />
+          <UserNav stores={stores} user={user} />
         </div>
       </div>
     </header>
