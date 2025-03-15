@@ -14,7 +14,7 @@ const Page = async () => {
     redirect("/auth-callback");
   }
 
-  console.log(stores);
+  
 
   return (
     <>
