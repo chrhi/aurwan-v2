@@ -24,7 +24,7 @@ export default function ProductInfo() {
     content_name: "منظم مستحضرات التجميل الأكريليكي الشفاف",
     content_ids: ["cm86f53ti0001wmkkernjxr7s"],
     content_type: "product",
-    value: 3900,
+    value: 3500,
     currency: "DZD",
   };
 
@@ -46,6 +46,13 @@ export default function ProductInfo() {
 
     e.currentTarget.style.backgroundPosition = `${x}% ${y}%`;
   };
+
+  // Calculate discount percentage
+  const originalPrice = 5500;
+  const currentPrice = 3500;
+  const discountPercentage = Math.round(
+    ((originalPrice - currentPrice) / originalPrice) * 100
+  );
 
   return (
     <MaxWidthWrapper>
@@ -85,6 +92,14 @@ export default function ProductInfo() {
             <Badge className="absolute top-2 right-2 bg-amber-500">
               باقي 7 فقط
             </Badge>
+            {/* New discount badge */}
+            <Badge className="absolute bottom-2 right-2 bg-green-600">
+              خصم {discountPercentage}%
+            </Badge>
+            {/* Free shipping badge */}
+            <Badge className="absolute bottom-2 left-2 bg-blue-600">
+              شحن مجاني
+            </Badge>
           </div>
 
           {/* Thumbnail gallery */}
@@ -117,18 +132,31 @@ export default function ProductInfo() {
             </h1>
           </div>
 
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2">
             <div className="flex items-center gap-3 justify-end">
               <span className="text-2xl font-bold text-right text-rose-600">
-                3900 DZ
+                3500 DZ
+              </span>
+              <span className="text-gray-500 text-lg line-through">
+                5500 DZ
+              </span>
+              <Badge className="bg-green-600">
+                توفير {originalPrice - currentPrice} DZ
+              </Badge>
+            </div>
+            <div className="flex items-center justify-end">
+              <span className="font-medium text-blue-600 flex items-center gap-1">
+                <Truck className="h-4 w-4" /> الشحن مجاني على حسابنا
               </span>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3 my-2">
-            <div className="flex items-center gap-2 justify-end border rounded-md p-2">
-              <span className="text-sm font-medium text-right">شحن سريع</span>
-              <Truck className="h-5 w-5 text-rose-600" />
+            <div className="flex items-center gap-2 justify-end border rounded-md p-2 bg-blue-50">
+              <span className="text-sm font-medium text-right text-blue-700">
+                شحن مجاني
+              </span>
+              <Truck className="h-5 w-5 text-blue-600" />
             </div>
             <div className="flex items-center gap-2 justify-end border rounded-md p-2">
               <span className="text-sm font-medium text-right">
@@ -215,6 +243,19 @@ export default function ProductInfo() {
         </div>
       </div>
 
+      {/* Special offer banner with free shipping */}
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+        <div className="flex items-center justify-center gap-3">
+          <Truck className="h-6 w-6 text-blue-600" />
+          <h3 className="text-lg font-bold text-blue-800">
+            عرض خاص: شحن مجاني على جميع الطلبات!
+          </h3>
+        </div>
+        <p className="text-blue-700 text-center mt-2">
+          نتحمل تكلفة الشحن بالكامل. السعر النهائي 3500 دينار فقط لا غير.
+        </p>
+      </div>
+
       {/* Frequently asked questions - reduce buying friction */}
       <div className="mb-10">
         <h3 className="text-xl font-bold text-right mb-4">الأسئلة الشائعة</h3>
@@ -233,6 +274,15 @@ export default function ProductInfo() {
             <p className="text-gray-600 text-right mt-1">
               نعم، المنظم مثالي لتخزين وعرض المجوهرات والإكسسوارات الصغيرة
               بالإضافة إلى مستحضرات التجميل.
+            </p>
+          </div>
+          <div className="border rounded-lg p-3">
+            <p className="font-medium text-right">
+              هل تكلفة الشحن مشمولة في السعر؟
+            </p>
+            <p className="text-gray-600 text-right mt-1">
+              نعم، نحن نتحمل تكلفة الشحن بالكامل. المبلغ الذي ستدفعه هو 3500
+              دينار فقط بدون أي تكاليف إضافية.
             </p>
           </div>
           <div className="border rounded-lg p-3">
